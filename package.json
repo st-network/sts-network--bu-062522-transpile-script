@@ -1,0 +1,53 @@
+{
+  "name": "sts-network",
+  "version": "1.0.0",
+  "author": "servingtokens.com <servingtokens.com@protonmail.com>",
+  "scripts": {
+    "postinstall": "npx next telemetry disable",
+    "build": "npm run build-scripts && chmod +x build.sh && ./build.sh",
+    "next-build": "next build && npm run build-scripts",
+    "dev": "npm run docker-build",
+    "start": "npm run docker-build",
+    "now-build": "next build",
+    "prepublishOnly": "npm run build",
+    "vercel-dev": "npx vercel",
+    "vercel-prod": "npx vercel --prod",
+    "docker-build": "docker build . -t sts-runtime",
+    "docker-run": "docker run -p3000:3000 sts-runtime",
+    "docker-ls": "docker image ls",
+    "build:cli": "ncc build cli.js -o dist/cli",
+    "build:main": "ncc build main.js -o dist/main",
+    "build:sts-client-script": "ncc build data/self-service-api.js -o api/namespace/script",
+    "build-scripts": "concurrently 'npm:build:cli' 'npm:build:main' 'npm:build:sts-client-script'",
+    "test": "node main.test.js"
+  },
+  "main": "./dist/index.js",
+  "dependencies": {
+    "args": "^5.0.0",
+    "chalk": "^2.4.1",
+    "execa": "5.0.0",
+    "fs-extra": "^10.0.1",
+    "node-fetch": "2",
+    "snake-case": "3.0.4"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "latest",
+    "concurrently": "^4.1.0",
+    "next": "^12.1.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.2",
+    "strip-ansi": "^5.0.0",
+    "vercel-dev-runtime": "^0.0.4",
+    "@types/fs-extra": "^9.0.13",
+    "@types/glob": "^7.2.0",
+    "@types/node": "^14.18.21",
+    "@types/node-fetch": "2",
+    "@types/react": "^17.0.47",
+    "@vercel/build-utils": "^2.15.0",
+    "@vercel/frameworks": "^0.2.0",
+    "@vercel/routing-utils": "^1.9.2",
+    "eslint": "8.12.0",
+    "eslint-config-next": "12.1.4",
+    "typescript": "^4.7.4"
+  }
+}

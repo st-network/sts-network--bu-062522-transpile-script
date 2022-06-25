@@ -1,0 +1,6 @@
+{
+    "public": true,
+    "functions": {
+      "api/namespace/*.sh": { "runtime": "vercel-dev-runtime@0.0.4" }
+    }
+  }

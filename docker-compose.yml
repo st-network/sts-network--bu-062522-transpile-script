@@ -1,0 +1,17 @@
+services:
+  app:
+    image: ghcr.io/sts-network/sts-network
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    command: ["yarn", "dev"]
+    environment:
+      - "NODE_ENV=development"
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
